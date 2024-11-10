@@ -23,7 +23,7 @@ public:
 				output = false;
 			}
 			else if (startInput == 'n') {
-				std::cout << "\nSee you next time!";
+				std::cout << "\nSee you next time!\n";
 				system("pause");
 				output = false;
 			}
@@ -90,13 +90,14 @@ public:
 				output = true;
 			}
 		}
-		std::cout << "Congradulations " << winningPlayer << " Player, You win!";
+		std::cout << "Congradulations " << winningPlayer << " Player, You win!\n\n";
+		system("pause");
 		return output;
 	}
 
 	// This ensures you can only win with 3 in a row.
 	bool determineWinType(bool topWinner = false, bool centerWinner = false, bool bottomWinner = false, bool crossWinner = false
-						, bool vertLeftWinner = false, bool vertCenterWinner = false, bool vertRightWinner = false) {
+						, bool vertLeftWinner = false, bool vertCenterWinner = false, bool vertRightWinner = false) const {
 		if (topLeft == topMid && topMid == topRight) {
 			topWinner = true;
 			return topWinner;
@@ -144,7 +145,7 @@ public:
 	std::string &bottomMid = gameBoard[2][1];
 	std::string &bottomRight = gameBoard[2][2];
 
-	void showGameBoard() {  // A visual representation of the gameboard.
+	void showGameBoard() const{  // A visual representation of the gameboard.
 		std::cout << "\n{" << topLeft << "," << topMid << "," << topRight << "}\n"
 			<< "{" << centerLeft << "," << centerMid << "," << centerRight << "}\n"
 			<< "{" << bottomLeft << "," << bottomMid << "," << bottomRight << "}\n\n";
@@ -155,6 +156,8 @@ int main() {
 	Game ticTacToe;
 	std::cout << "Type 'y' to play. Type 'n' to quit.";
 	ticTacToe.startGame();
-	ticTacToe.activeGame();
+	if (ticTacToe.startInput == 'y') {
+		ticTacToe.activeGame();
+	}
 	return 0;
 }
